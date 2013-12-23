@@ -23,6 +23,16 @@ class Foursquare
     @scheme = "/users/#{userid}"
     request @, params, fn
 
+  friends: (userid, params, fn) ->
+    userid = 'self' if not userid or parseInt(userid, 10) <= 0
+
+    if isFunction params
+      fn = params
+      params = {}
+
+    @scheme = "/users/#{userid}/friends"
+    request @, params, fn
+
   checkins: (userid, params, fn) ->
     userid = 'self' if not userid or parseInt(userid, 10) <= 0
 
